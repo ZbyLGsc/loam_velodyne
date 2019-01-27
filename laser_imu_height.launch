@@ -1,0 +1,12 @@
+<launch>
+	
+	<include file ="/home/urop/catkin_ws/src/drivers/velodyne/velodyne_pointcloud/launch/VLP16_points.launch"/>
+	<include file = "/home/urop/catkin_ws/src/djiros/launch/djiros.launch"/>
+
+	<!--node pkg="terarangerduo" type="terarangerduo_node" name="terarangerduo" output="screen"/-->
+	<!--node pkg="sonar_dis"  type="sonar_dis" name="sonar_dis" output="screen"/-->
+	<!-- <node pkg="teraranger" type="one" name="teraranger_one" output="screen"/> -->
+	<!--include file = "/home/gf/catkin_ws/src/mocap_optitrack/launch/mocap.launch"/-->
+	<!--include file = "/home/gf/catkin_ws/src/bluefox2/launch/single_node.launch"/-->
+
+</launch>

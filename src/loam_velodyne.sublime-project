@@ -1,0 +1,23 @@
+{
+	"folders":
+	[
+		{
+			"path": "/home/gf/catkin_ws/src/laser_estimation/loam_velodyne"
+		}
+	],
+	"settings":
+	{
+		"sublimeclang_options":
+		[
+			"-isystem",
+			"/usr/include/eigen3",
+			"-isystem",
+			"/usr/include/opencv2",
+			"-isystem",
+			"/usr/include/pcl-1.7",
+			"-isystem",
+			"/opt/ros/indigo/include",
+			"-isystem"
+		]
+	}
+}

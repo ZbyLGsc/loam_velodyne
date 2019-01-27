@@ -1,0 +1,58 @@
+<launch>
+  <!--arg name="height_topic" default="/teraranger/timeofflight" /-->
+  
+  <node pkg="loam_velodyne" type="velo_scanRegistration" name="velo_scanRegistration" output="screen"/>
+  <node pkg="loam_velodyne" type="velo_laserOdometry" name="velo_laserOdometry" output="screen" respawn="true"/>
+  <node pkg="loam_velodyne" type="velo_laserMapping" name="velo_laserMapping" output="screen"/>
+  <!--node pkg="loam_velodyne" type="velo_transformMaintenance" name="velo_transformMaintenance" output="screen"/-->
+
+  <node pkg="ekf" type="ekf_node" name="ekf_node" output="screen">
+        <remap from="~imu" to="/djiros/imu"/>
+        <remap from="~laser_odom" to="/aft_mapped_to_init"/>
+        <!--remap from="~gps_odom"   to="/gps/odom"/-->
+  </node>
+  
+  <node pkg="grad_spline" type="tf_assist" name="tf_assist" output="screen">
+        <remap from="~fused_odom" to="/ekf_node/odom_ekf"/>
+
+        <remap from="~odom_world" to="/odom_world"/>
+        <remap from="~path_world" to="/path_world"/>
+        <!--remap from="~gps_odom"   to="/gps/odom"/-->
+  </node>
+
+  
+  <!--node pkg="gps_common" name="utm_odometry_node" type="utm_odometry_node" output="screen"/-->
+
+    <!-- Multi-Sensor UKF -->  
+    <!--      
+  <node pkg="multi_sensor_ukf"
+        name="quadrotor_ukf"
+        type="quadrotor_ukf"       
+        output="screen">
+    <remap from="~odom_gps"    to="/gps/odom"/>    
+    <remap from="~odom_gps"    to="/aft_mapped_to_init"/>    
+    <<remap from="~odom_vision" to="TODO"/>>
+    <remap from="~imu"         to="/djiros/imu"/>
+    <remap from="~odom_laser"  to="/aft_mapped_to_init"/>    
+    <remap from="~odom_laser"  to="/icp_node/laser_quad_odom"/>    
+    <remap from="~odom_flow"   to="/monocular_velocity_estimator/odom_velocity"/>
+    <remap from="~odom_vision"   to="/self_calibration_estimator/odometry"/>
+    <remap from="~height_rel"  to="/teraranger/timeofflight"/>
+    <remap from="~height_abs"  to="/sonar/height"/>
+    <param name="is_init_gps" value="true"/>                          
+    <param name="is_init_vo" value="false"/>                          
+    <param name="is_init_laser" value="false"/>                          
+    <param name="is_init_vision_pose" value="false"/>                          
+  </node>  
+  -->
+  
+  <!--
+  <node name="rviz" 
+      pkg="rviz" 
+      type="rviz" 
+      output="screen"
+      args="-d $(find pcd_trajectory)/launch/rviz_config/rviz_config.rviz"> 
+  </node>
+  -->
+  
+</launch>
