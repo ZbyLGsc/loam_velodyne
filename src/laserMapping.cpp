@@ -729,13 +729,13 @@ int main(int argc, char** argv)
   cv::Mat matP(6, 6, CV_32F, cv::Scalar::all(0));
 
   pcl::VoxelGrid<pcl::PointXYZI> downSizeFilterCorner;
-  downSizeFilterCorner.setLeafSize(0.25, 0.25, 0.25);//Outdoor Testing 
+  // downSizeFilterCorner.setLeafSize(0.25, 0.25, 0.25);//Outdoor Testing 
   //downSizeFilterCorner.setLeafSize(0.3, 0.3, 0.3);//Outdoor Testing
-  //downSizeFilterCorner.setLeafSize(0.2, 0.2, 0.2);//Indoor
+  downSizeFilterCorner.setLeafSize(0.2, 0.2, 0.2);//Indoor
 
   pcl::VoxelGrid<pcl::PointXYZI> downSizeFilterSurf;
-  downSizeFilterSurf.setLeafSize(0.4, 0.4, 0.4); //Outdoor Testing
-  //downSizeFilterSurf.setLeafSize(0.2, 0.2, 0.2); //Indoor
+  // downSizeFilterSurf.setLeafSize(0.4, 0.4, 0.4); //Outdoor Testing
+  downSizeFilterSurf.setLeafSize(0.2, 0.2, 0.2); //Indoor
 
   pcl::VoxelGrid<pcl::PointXYZI> downSizeFilterMap;
   //downSizeFilterMap.setLeafSize(0.1, 0.1, 0.1);
@@ -976,7 +976,7 @@ int main(int argc, char** argv)
               point_select = laserCloudCornerFromMap->points[i];
               
               if(point_select.intensity < 0.95)
-                  point_select.intensity = max(0.0, point_select.intensity - 0.025); // Indoor -0.05 
+                  point_select.intensity = max(0.0, point_select.intensity - 0.05); // Indoor -0.05 
               //ROS_WARN("Check Point intensity: %f",point_select.intensity);
               if(point_select.intensity < 0.3 )
                   continue;
@@ -991,7 +991,7 @@ int main(int argc, char** argv)
               point_select = laserCloudSurfFromMap->points[i];
 
               if(point_select.intensity < 0.95)
-                  point_select.intensity = max(0.0, point_select.intensity - 0.025); // Indoor -0.05
+                  point_select.intensity = max(0.0, point_select.intensity - 0.05); // Indoor -0.05
               //ROS_WARN("Check Point intensity: %f",point_select.intensity);
               if(point_select.intensity < 0.3)
                   continue;
@@ -1443,7 +1443,7 @@ int main(int argc, char** argv)
             //cout<<"###############################################################################"<<endl;
           cubeInd = cubeI + laserCloudWidth * cubeJ + laserCloudWidth * laserCloudHeight * cubeK;
           
-          if(pointSearchSqDis[0] > 0.15)//Indoor 0.04 , outdoor 0.06
+          if(pointSearchSqDis[0] > 0.04)//Indoor 0.04 , outdoor 0.06
                laserCloudCornerArray[cubeInd]->push_back(pointSel);
 //################################################################################################################          
         }
@@ -1486,7 +1486,7 @@ int main(int argc, char** argv)
           //  cout<<"###############################################################################"<<endl;
           cubeInd = cubeI + laserCloudWidth * cubeJ + laserCloudWidth * laserCloudHeight * cubeK;
           
-          if(pointSearchSqDis[0] > 0.15)//Indoor 0.04 , Outdoor 0.15
+          if(pointSearchSqDis[0] > 0.04)//Indoor 0.04 , Outdoor 0.15
                 laserCloudSurfArray[cubeInd]->push_back(pointSel);
 
           }
